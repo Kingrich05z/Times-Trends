@@ -50,7 +50,7 @@ const initialProducts = [
     },
     createJersey('bayern-munich', 'Maillots Bayern Munich', 6000, 'Clubs', ['Bayern1.png', 'Bayern.jpeg', 'Bayern3.jpeg'], 'Maillots Bayern Munich, plusieurs modèles et coloris.', 8000),
     createJersey('al-ahli', 'Maillot Al-Ahli', 6000, 'Clubs', ['Ad1.jpeg'], 'Maillot d’Al-Ahli.'),
-    createJersey('arsenal', 'Maillots Arsenal', 8000, 'Clubs', ['Arsenal1.jpeg', 'Arsenal.jpeg', 'Arsenal2.jpeg'], 'Collection de maillots Arsenal.', 10000),
+    createJersey('arsenal', 'Maillots Arsenal', 6000, 'Clubs', ['Arsenal1.jpeg', 'Arsenal.jpeg', 'Arsenal2.jpeg'], 'Collection de maillots Arsenal.'),
     createJersey('aston-villa', 'Maillots Aston Villa', 6000, 'Clubs', ['Aston Villa 1.jpeg', 'Aston Villa.jpeg'], 'Collection de maillots Aston Villa.'),
     createJersey('auxerre', 'Maillot AJ Auxerre', 6000, 'Clubs', ['Auxerre.jpeg'], 'Maillot de l’AJ Auxerre.'),
     createJersey('barcelone', 'Maillots FC Barcelone', 6000, 'Clubs', ['Barca1.jpeg', 'Barca.jpeg'], 'Collection de maillots du FC Barcelone.'),
@@ -65,14 +65,14 @@ const initialProducts = [
     createJersey('galatasaray', 'Maillot Galatasaray', 6000, 'Clubs', ['Galatasaray.jpeg'], 'Maillot de Galatasaray.'),
     createJersey('al-hilal', 'Maillot Al-Hilal', 6000, 'Clubs', ['Hilal.jpeg'], 'Maillot d’Al-Hilal.'),
     createJersey('inter-miami', 'Maillots Inter Miami', 6000, 'Clubs', ['InterMD.jpeg', 'InterME.jpeg', 'InterMiami1.jpeg'], 'Collection de maillots Inter Miami.'),
-    createJersey('juventus', 'Maillots Juventus', 8000, 'Clubs', ['Juventus1.jpeg', 'Juventus2.jpeg'], 'Collection de maillots Juventus.', 10000),
+    createJersey('juventus', 'Maillots Juventus', 6000, 'Clubs', ['Juventus1.jpeg', 'Juventus2.jpeg'], 'Collection de maillots Juventus.'),
     createJersey('leeds', 'Maillot Leeds United', 6000, 'Clubs', ['Leeds.jpeg'], 'Maillot de Leeds United.'),
     createJersey('lens', 'Maillot RC Lens', 6000, 'Clubs', ['Lens.jpeg'], 'Maillot du RC Lens.'),
-    createJersey('liverpool', 'Maillots Liverpool', 8000, 'Clubs', ['Liverpool1.jpeg', 'Liverpool.jpeg', 'Liverpool2.jpeg', 'Liverpool3.jpeg'], 'Collection de maillots Liverpool.', 10000),
+    createJersey('liverpool', 'Maillots Liverpool', 6000, 'Clubs', ['Liverpool1.jpeg', 'Liverpool.jpeg', 'Liverpool2.jpeg', 'Liverpool3.jpeg'], 'Collection de maillots Liverpool.'),
     createJersey('manchester-city', 'Maillots Manchester City', 6000, 'Clubs', ['ManC1.jpeg', 'ManC2.jpeg', 'ManC3.jpeg'], 'Collection de maillots Manchester City.'),
     createJersey('manchester-united', 'Maillots Manchester United', 6000, 'Clubs', ['ManU1.jpeg', 'ManU2.jpeg'], 'Collection de maillots Manchester United.'),
     createJersey('marseille', 'Maillots Olympique de Marseille', 6000, 'Clubs', ['OM1.jpeg', 'Marseille.jpeg', 'OM2.jpeg', 'OM3.jpeg'], 'Collection de maillots de l’Olympique de Marseille.'),
-    createJersey('metz', 'Maillots FC Metz', 8000, 'Clubs', ['Metz.jpeg', 'Metz2.jpeg'], 'Collection de maillots FC Metz.', 10000),
+    createJersey('metz', 'Maillots FC Metz', 6000, 'Clubs', ['Metz.jpeg', 'Metz2.jpeg'], 'Collection de maillots FC Metz.'),
     createJersey('ac-milan', 'Maillots AC Milan', 6000, 'Clubs', ['Milan1.jpeg', 'Milan2.jpeg'], 'Collection de maillots AC Milan.'),
     createJersey('monaco', 'Maillot AS Monaco', 6000, 'Clubs', ['Monaco.jpeg'], 'Maillot de l’AS Monaco.'),
     createJersey('newcastle', 'Maillot Newcastle United', 6000, 'Clubs', ['Newcastle.jpeg'], 'Maillot de Newcastle United.'),
@@ -127,6 +127,31 @@ if (unikProduct && unikProduct.image === 'images/Unik.jpeg' && (!unikProduct.ima
 if (unikProduct && JSON.stringify(unikProduct.colors) !== JSON.stringify(unikTShirtColors)) {
     unikProduct.colors = [...unikTShirtColors];
     localStorage.setItem('time_trend_products', JSON.stringify(products));
+}
+const clubPriceMigrationKey = 'time_trend_club_prices_2026_10_v1';
+if (!localStorage.getItem(clubPriceMigrationKey)) {
+    const targetPrices = new Map([
+        ['arsenal', 6000],
+        ['arsenal-8000', 6000],
+        ['arsenal-6000', 6000],
+        ['juventus', 6000],
+        ['juventus-8000', 6000],
+        ['juventus-6000', 6000],
+        ['liverpool', 6000],
+        ['liverpool-8000', 6000],
+        ['liverpool-6000', 6000],
+        ['metz', 6000],
+        ['metz-8000', 6000],
+        ['metz-6000', 6000]
+    ]);
+    products.forEach(product => {
+        if (targetPrices.has(product.id)) {
+            product.price = targetPrices.get(product.id);
+            delete product.oldPrice;
+        }
+    });
+    localStorage.setItem('time_trend_products', JSON.stringify(products));
+    localStorage.setItem(clubPriceMigrationKey, 'true');
 }
 let cart = JSON.parse(localStorage.getItem('time_trend_cart')) || [];
 let currentSelectedProduct = null;
