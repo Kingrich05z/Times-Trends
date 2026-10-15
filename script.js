@@ -55,13 +55,12 @@ const initialProducts = [
     createJersey('auxerre', 'Maillot AJ Auxerre', 6000, 'Clubs', ['Auxerre.jpeg'], 'Maillot de l’AJ Auxerre.'),
     createJersey('barcelone', 'Maillots FC Barcelone', 6000, 'Clubs', ['Barca1.jpeg', 'Barca.jpeg'], 'Collection de maillots du FC Barcelone.'),
     createJersey('benfica', 'Maillot Benfica', 6000, 'Clubs', ['Benfica.jpeg'], 'Maillot du Benfica.'),
-    createJersey('bolton', 'Maillot Bolton Wanderers', 6000, 'Clubs', ['1h.jpeg'], 'Maillot de Bolton Wanderers.'),
+    createJersey('nottingham-forest', 'Maillots Nottingham Forest', 6000, 'Clubs', ['1h.jpeg', 'Forest.jpeg'], 'Collection de maillots Nottingham Forest.'),
     createJersey('brighton', 'Maillot Brighton', 6000, 'Clubs', ['Brighton.jpeg'], 'Maillot de Brighton.'),
     createJersey('chelsea', 'Maillots Chelsea', 6000, 'Clubs', ['Chelsea1.jpeg', 'Chelsea2.jpeg'], 'Collection de maillots Chelsea.'),
     createJersey('flamengo', 'Maillot Flamengo', 6000, 'Clubs', ['Crf.jpeg'], 'Maillot de Flamengo.'),
     createJersey('dortmund', 'Maillot Borussia Dortmund', 6000, 'Clubs', ['Dortmund.jpeg'], 'Maillot du Borussia Dortmund.'),
     createJersey('everton', 'Maillot Everton', 6000, 'Clubs', ['Everton.jpeg'], 'Maillot d’Everton.'),
-    createJersey('nottingham-forest', 'Maillot Nottingham Forest', 6000, 'Clubs', ['Forest.jpeg'], 'Maillot de Nottingham Forest.'),
     createJersey('galatasaray', 'Maillot Galatasaray', 6000, 'Clubs', ['Galatasaray.jpeg'], 'Maillot de Galatasaray.'),
     createJersey('al-hilal', 'Maillot Al-Hilal', 6000, 'Clubs', ['Hilal.jpeg'], 'Maillot d’Al-Hilal.'),
     createJersey('inter-miami', 'Maillots Inter Miami', 6000, 'Clubs', ['InterMD.jpeg', 'InterME.jpeg', 'InterMiami1.jpeg'], 'Collection de maillots Inter Miami.'),
@@ -100,13 +99,13 @@ const initialProducts = [
     createJersey('etats-unis', 'Maillot États-Unis', 7000, 'Nations', ['usa.jpeg'], 'Maillot de l’équipe nationale des États-Unis.')
 ];
 
-const catalogMigrationKey = 'time_trend_catalog_additions_2026_10_v7';
+const catalogMigrationKey = 'time_trend_catalog_additions_2026_10_v8';
 const legacyCatalogIds = new Set([
     '1', 'aston-villa-6000', 'barcelone-6000', 'brighton-6000', 'chelsea-6000',
     'inter-miami-domicile-6000', 'marseille-6000', 'milan-6000', 'real-madrid-6000',
     'tottenham-6000', 'auxerre-6000', 'inter-miami-exterieur-6000', 'liverpool-6000',
     'manchester-united-6000', 'manchester-city-6000', 'arsenal-8000', 'juventus-8000',
-    'liverpool-8000', 'metz-8000', 'venezia-8000', 't-shirt-unik'
+    'liverpool-8000', 'metz-8000', 'venezia-8000', 't-shirt-unik', 'bolton'
 ]);
 let products = JSON.parse(localStorage.getItem('time_trend_products')) || initialProducts;
 if (!localStorage.getItem(catalogMigrationKey)) {
