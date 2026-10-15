@@ -1,4 +1,4 @@
-const BAYERN_JERSEY_IMG = 'images/bayerner.png';
+const BAYERN_JERSEY_IMG = 'images/club/Bayern1.png';
 
 function normalizeImagePath(value) {
     if (!value) return BAYERN_JERSEY_IMG;
@@ -13,25 +13,163 @@ function normalizeImagePath(value) {
     return cleaned.startsWith('images/') ? cleaned : `images/${cleaned}`;
 }
 
-const initialProducts = [
-    {
-        id: '1',
-        title: 'Maillots Bayern Munich',
-        price: 6000,
-        oldPrice: 8000,
+function createJersey(id, title, price, category, files, description, oldPrice = null) {
+    const folder = category === 'Nations' ? 'nation' : 'club';
+    const images = files.map(file => `images/${folder}/${file}`);
+    return {
+        id,
+        title,
+        price,
+        ...(oldPrice ? { oldPrice } : {}),
         sizes: ['M', 'L', 'XL', 'XXL'],
-        category: 'Clubs',
-        image: BAYERN_JERSEY_IMG,
-        description: 'Maillots Bayern Munich (Domicile & Extérieur) de qualité exceptionnelle. Tissu respirant haut de gamme, badges brodés, coupe sportive moderne.'
-    }
+        category,
+        image: images[0],
+        images,
+        description
+    };
+}
+
+const unikTShirtColors = [
+    'Vert', 'Vert menthe', 'Vert militaire', 'Vert ciment', 'Saumon',
+    'Bleu ciel', 'Bleu marine', 'Bleu bic', 'Bleu de nuit', 'Blanc',
+    'Noir', 'Orange', 'Rouge bordeaux', 'Rose', 'Marron',
+    'Gris', 'Jaune moutarde', 'Jaune poussin', 'Jaune clair', 'Beige'
 ];
 
+const initialProducts = [
+    {
+        id: 't-shirt-unik',
+        title: 'T-shirt Unik',
+        price: 3000,
+        sizes: ['M', 'L', 'XL', 'XXL'],
+        colors: unikTShirtColors,
+        category: 'T-shirts',
+        image: 'images/Unik.jpeg',
+        images: ['images/Unik.jpeg', 'images/Uni.jpeg', 'images/unie.jpg', 'images/unique.jpg'],
+        description: 'T-shirt Unik disponible en plusieurs couleurs.'
+    },
+    createJersey('bayern-munich', 'Maillots Bayern Munich', 6000, 'Clubs', ['Bayern1.png', 'Bayern.jpeg', 'Bayern3.jpeg'], 'Maillots Bayern Munich, plusieurs modèles et coloris.', 8000),
+    createJersey('al-ahli', 'Maillot Al-Ahli', 6000, 'Clubs', ['Ad1.jpeg'], 'Maillot d’Al-Ahli.'),
+    createJersey('arsenal', 'Maillots Arsenal', 8000, 'Clubs', ['Arsenal1.jpeg', 'Arsenal.jpeg', 'Arsenal2.jpeg'], 'Collection de maillots Arsenal.', 10000),
+    createJersey('aston-villa', 'Maillots Aston Villa', 6000, 'Clubs', ['Aston Villa 1.jpeg', 'Aston Villa.jpeg'], 'Collection de maillots Aston Villa.'),
+    createJersey('auxerre', 'Maillot AJ Auxerre', 6000, 'Clubs', ['Auxerre.jpeg'], 'Maillot de l’AJ Auxerre.'),
+    createJersey('barcelone', 'Maillots FC Barcelone', 6000, 'Clubs', ['Barca1.jpeg', 'Barca.jpeg'], 'Collection de maillots du FC Barcelone.'),
+    createJersey('benfica', 'Maillot Benfica', 6000, 'Clubs', ['Benfica.jpeg'], 'Maillot du Benfica.'),
+    createJersey('bolton', 'Maillot Bolton Wanderers', 6000, 'Clubs', ['1h.jpeg'], 'Maillot de Bolton Wanderers.'),
+    createJersey('brighton', 'Maillot Brighton', 6000, 'Clubs', ['Brighton.jpeg'], 'Maillot de Brighton.'),
+    createJersey('chelsea', 'Maillots Chelsea', 6000, 'Clubs', ['Chelsea1.jpeg', 'Chelsea2.jpeg'], 'Collection de maillots Chelsea.'),
+    createJersey('flamengo', 'Maillot Flamengo', 6000, 'Clubs', ['Crf.jpeg'], 'Maillot de Flamengo.'),
+    createJersey('dortmund', 'Maillot Borussia Dortmund', 6000, 'Clubs', ['Dortmund.jpeg'], 'Maillot du Borussia Dortmund.'),
+    createJersey('everton', 'Maillot Everton', 6000, 'Clubs', ['Everton.jpeg'], 'Maillot d’Everton.'),
+    createJersey('nottingham-forest', 'Maillot Nottingham Forest', 6000, 'Clubs', ['Forest.jpeg'], 'Maillot de Nottingham Forest.'),
+    createJersey('galatasaray', 'Maillot Galatasaray', 6000, 'Clubs', ['Galatasaray.jpeg'], 'Maillot de Galatasaray.'),
+    createJersey('al-hilal', 'Maillot Al-Hilal', 6000, 'Clubs', ['Hilal.jpeg'], 'Maillot d’Al-Hilal.'),
+    createJersey('inter-miami', 'Maillots Inter Miami', 6000, 'Clubs', ['InterMD.jpeg', 'InterME.jpeg', 'InterMiami1.jpeg'], 'Collection de maillots Inter Miami.'),
+    createJersey('juventus', 'Maillots Juventus', 8000, 'Clubs', ['Juventus1.jpeg', 'Juventus2.jpeg'], 'Collection de maillots Juventus.', 10000),
+    createJersey('leeds', 'Maillot Leeds United', 6000, 'Clubs', ['Leeds.jpeg'], 'Maillot de Leeds United.'),
+    createJersey('lens', 'Maillot RC Lens', 6000, 'Clubs', ['Lens.jpeg'], 'Maillot du RC Lens.'),
+    createJersey('liverpool', 'Maillots Liverpool', 8000, 'Clubs', ['Liverpool1.jpeg', 'Liverpool.jpeg', 'Liverpool2.jpeg', 'Liverpool3.jpeg'], 'Collection de maillots Liverpool.', 10000),
+    createJersey('manchester-city', 'Maillots Manchester City', 6000, 'Clubs', ['ManC1.jpeg', 'ManC2.jpeg', 'ManC3.jpeg'], 'Collection de maillots Manchester City.'),
+    createJersey('manchester-united', 'Maillots Manchester United', 6000, 'Clubs', ['ManU1.jpeg', 'ManU2.jpeg'], 'Collection de maillots Manchester United.'),
+    createJersey('marseille', 'Maillots Olympique de Marseille', 6000, 'Clubs', ['OM1.jpeg', 'Marseille.jpeg', 'OM2.jpeg', 'OM3.jpeg'], 'Collection de maillots de l’Olympique de Marseille.'),
+    createJersey('metz', 'Maillots FC Metz', 8000, 'Clubs', ['Metz.jpeg', 'Metz2.jpeg'], 'Collection de maillots FC Metz.', 10000),
+    createJersey('ac-milan', 'Maillots AC Milan', 6000, 'Clubs', ['Milan1.jpeg', 'Milan2.jpeg'], 'Collection de maillots AC Milan.'),
+    createJersey('monaco', 'Maillot AS Monaco', 6000, 'Clubs', ['Monaco.jpeg'], 'Maillot de l’AS Monaco.'),
+    createJersey('newcastle', 'Maillot Newcastle United', 6000, 'Clubs', ['Newcastle.jpeg'], 'Maillot de Newcastle United.'),
+    createJersey('paris-saint-germain', 'Maillots Paris Saint-Germain', 6000, 'Clubs', ['PSG1.jpeg', 'PSG2.jpeg', 'PSG3.jpeg'], 'Collection de maillots du Paris Saint-Germain.'),
+    createJersey('real-madrid', 'Maillots Real Madrid', 6000, 'Clubs', ['Real M1.jpeg', 'Real M.jpeg'], 'Collection de maillots Real Madrid.'),
+    createJersey('roma', 'Maillot AS Roma', 6000, 'Clubs', ['Roma.jpeg'], 'Maillot de l’AS Roma.'),
+    createJersey('santos', 'Maillot Santos', 6000, 'Clubs', ['Santos.jpeg'], 'Maillot de Santos.'),
+    createJersey('tottenham', 'Maillots Tottenham', 6000, 'Clubs', ['Tothenam1.jpeg', 'Tothenam.jpeg'], 'Collection de maillots Tottenham.'),
+    createJersey('venezia', 'Maillot Venezia', 8000, 'Clubs', ['Venizia.jpeg'], 'Maillot Venezia.', 10000),
+    createJersey('west-ham', 'Maillots West Ham', 6000, 'Clubs', ['Westham1.jpeg', 'Westham2.jpeg'], 'Collection de maillots West Ham.'),
+    createJersey('allemagne', 'Maillot Allemagne', 7000, 'Nations', ['allemagne.jpeg'], 'Maillot de l’équipe nationale d’Allemagne.'),
+    createJersey('argentine', 'Maillot Argentine', 7000, 'Nations', ['argentine.jpeg'], 'Maillot de l’équipe nationale d’Argentine.'),
+    createJersey('belgique', 'Maillot Belgique', 7000, 'Nations', ['belgic.jpeg'], 'Maillot de l’équipe nationale de Belgique.'),
+    createJersey('bresil', 'Maillot Brésil', 7000, 'Nations', ['brazil.jpeg'], 'Maillot de l’équipe nationale du Brésil.'),
+    createJersey('angleterre', 'Maillot Angleterre', 7000, 'Nations', ['england.jpeg'], 'Maillot de l’équipe nationale d’Angleterre.'),
+    createJersey('france', 'Maillot France', 7000, 'Nations', ['fr.jpeg'], 'Maillot de l’équipe nationale de France.'),
+    createJersey('italie', 'Maillot Italie', 7000, 'Nations', ['italie.jpeg'], 'Maillot de l’équipe nationale d’Italie.'),
+    createJersey('jamaique', 'Maillot Jamaïque', 7000, 'Nations', ['jamaic.jpeg'], 'Maillot de l’équipe nationale de Jamaïque.'),
+    createJersey('coree', 'Maillot Corée', 7000, 'Nations', ['korea.jpeg'], 'Maillot de l’équipe nationale de Corée.'),
+    createJersey('pays-bas', 'Maillot Pays-Bas', 7000, 'Nations', ['paysbas.jpeg'], 'Maillot de l’équipe nationale des Pays-Bas.'),
+    createJersey('portugal', 'Maillot Portugal', 7000, 'Nations', ['portugal.jpeg'], 'Maillot de l’équipe nationale du Portugal.'),
+    createJersey('senegal', 'Maillot Sénégal', 6000, 'Nations', ['sn.jpeg'], 'Maillot de l’équipe nationale du Sénégal.'),
+    createJersey('espagne', 'Maillot Espagne', 7000, 'Nations', ['spain.jpeg'], 'Maillot de l’équipe nationale d’Espagne.'),
+    createJersey('tunisie', 'Maillot Tunisie', 7000, 'Nations', ['tunis.jpeg'], 'Maillot de l’équipe nationale de Tunisie.'),
+    createJersey('etats-unis', 'Maillot États-Unis', 7000, 'Nations', ['usa.jpeg'], 'Maillot de l’équipe nationale des États-Unis.')
+];
+
+const catalogMigrationKey = 'time_trend_catalog_additions_2026_10_v7';
+const legacyCatalogIds = new Set([
+    '1', 'aston-villa-6000', 'barcelone-6000', 'brighton-6000', 'chelsea-6000',
+    'inter-miami-domicile-6000', 'marseille-6000', 'milan-6000', 'real-madrid-6000',
+    'tottenham-6000', 'auxerre-6000', 'inter-miami-exterieur-6000', 'liverpool-6000',
+    'manchester-united-6000', 'manchester-city-6000', 'arsenal-8000', 'juventus-8000',
+    'liverpool-8000', 'metz-8000', 'venezia-8000', 't-shirt-unik'
+]);
 let products = JSON.parse(localStorage.getItem('time_trend_products')) || initialProducts;
+if (!localStorage.getItem(catalogMigrationKey)) {
+    const catalogProductIds = new Set([
+        ...legacyCatalogIds,
+        ...initialProducts.map(product => product.id)
+    ]);
+    const customProducts = products.filter(product => !catalogProductIds.has(product.id));
+    products = [...initialProducts, ...customProducts];
+    localStorage.setItem('time_trend_products', JSON.stringify(products));
+    localStorage.setItem(catalogMigrationKey, 'true');
+}
+const unikProduct = products.find(product => product.id === 't-shirt-unik');
+if (unikProduct && unikProduct.image === 'images/Unik.jpeg' && (!unikProduct.images || unikProduct.images.length < 2)) {
+    unikProduct.images = ['images/Unik.jpeg', 'images/Uni.jpeg', 'images/unie.jpg', 'images/unique.jpg'];
+    localStorage.setItem('time_trend_products', JSON.stringify(products));
+}
+if (unikProduct && JSON.stringify(unikProduct.colors) !== JSON.stringify(unikTShirtColors)) {
+    unikProduct.colors = [...unikTShirtColors];
+    localStorage.setItem('time_trend_products', JSON.stringify(products));
+}
 let cart = JSON.parse(localStorage.getItem('time_trend_cart')) || [];
 let currentSelectedProduct = null;
 let selectedSize = 'M';
+let selectedColor = '';
 let currentQuantity = 1;
 let isAdminLoggedIn = false;
+let activeCategory = 'all';
+let productSearchQuery = '';
+
+function isUnikTShirt(product) {
+    return product.id === 't-shirt-unik';
+}
+
+function calculateProductTotal(product, quantity) {
+    if (isUnikTShirt(product)) {
+        const bundles = Math.floor(quantity / 4);
+        const remainingShirts = quantity % 4;
+        return bundles * 10000 + remainingShirts * product.price;
+    }
+    return product.price * quantity;
+}
+
+function calculateCartTotals(items) {
+    const shirtQuantity = items
+        .filter(item => isUnikTShirt(item))
+        .reduce((total, item) => total + item.quantity, 0);
+    const shirtBaseTotal = items
+        .filter(item => isUnikTShirt(item))
+        .reduce((total, item) => total + item.price * item.quantity, 0);
+    const shirtDiscount = shirtBaseTotal - calculateProductTotal(
+        { id: 't-shirt-unik', price: items.find(item => isUnikTShirt(item))?.price || 3000 },
+        shirtQuantity
+    );
+    const otherProductsTotal = items
+        .filter(item => !isUnikTShirt(item))
+        .reduce((total, item) => total + item.price * item.quantity, 0);
+
+    return {
+        total: shirtBaseTotal - shirtDiscount + otherProductsTotal,
+        shirtDiscount
+    };
+}
 
 function saveProductsToStorage() {
     localStorage.setItem('time_trend_products', JSON.stringify(products));
@@ -102,16 +240,35 @@ function renderBestSeller() {
     sizesEl.textContent = `Tailles disponibles: ${featured.sizes.join(' • ')}`;
 }
 
-function renderProducts(filter = 'all') {
+function normalizeSearchText(value) {
+    return value
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLocaleLowerCase('fr');
+}
+
+function renderProducts(filter = activeCategory) {
     const grid = document.getElementById('products-grid');
     grid.innerHTML = '';
 
-    const filteredProducts = filter === 'all'
-        ? products
-        : products.filter(p => p.category === filter);
+    const normalizedQuery = normalizeSearchText(productSearchQuery.trim());
+    const filteredProducts = products.filter(product => {
+        const matchesCategory = filter === 'all' || product.category === filter;
+        const searchableText = normalizeSearchText([
+            product.title,
+            product.category,
+            product.description,
+            ...(product.colors || [])
+        ].join(' '));
+        return matchesCategory && (!normalizedQuery || searchableText.includes(normalizedQuery));
+    });
 
     if (filteredProducts.length === 0) {
-        grid.innerHTML = '<div class="col-span-full text-center py-12 text-gray-500">Aucun maillot trouvé dans cette catégorie.</div>';
+        grid.innerHTML = `<div class="col-span-full text-center py-12 text-gray-500">${
+            normalizedQuery
+                ? 'Aucun article ne correspond à votre recherche dans cette catégorie.'
+                : 'Aucun maillot trouvé dans cette catégorie.'
+        }</div>`;
         return;
     }
 
@@ -145,6 +302,7 @@ function renderProducts(filter = 'all') {
                         <div class="text-2xl font-extrabold text-gold">
                             ${product.price.toLocaleString()} FCFA
                         </div>
+                        ${isUnikTShirt(product) ? '<p class="text-sm font-semibold text-emerald-600 dark:text-emerald-400 mt-1">4 pour 10 000 FCFA</p>' : ''}
                     </div>
 
                     <div class="mb-6">
@@ -157,6 +315,17 @@ function renderProducts(filter = 'all') {
                             `).join('')}
                         </div>
                     </div>
+                    ${product.colors && product.colors.length ? `
+                    <div class="mb-6">
+                        <span class="text-xs text-gray-400 block mb-2 font-medium uppercase tracking-wider">Couleurs disponibles :</span>
+                        <div class="flex flex-wrap gap-1.5">
+                            ${product.colors.map(color => `
+                                <span class="px-2.5 py-1 text-xs font-bold rounded-md bg-gray-100 dark:bg-darkbg text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-darkborder">
+                                    ${color}
+                                </span>
+                            `).join('')}
+                        </div>
+                    </div>` : ''}
                 </div>
 
                 <div class="pt-2 border-t border-gray-100 dark:border-darkborder">
@@ -171,12 +340,22 @@ function renderProducts(filter = 'all') {
 }
 
 function filterCategory(cat) {
+    activeCategory = cat;
     document.querySelectorAll('.cat-btn').forEach(btn => {
         btn.classList.remove('bg-gold', 'text-black', 'border-gold', 'active');
         btn.classList.add('border-gray-300', 'dark:border-darkborder');
     });
-    event.target.classList.add('bg-gold', 'text-black', 'border-gold', 'active');
-    renderProducts(cat);
+    const selectedButton = [...document.querySelectorAll('.cat-btn')]
+        .find(button => button.getAttribute('onclick') === `filterCategory('${cat}')`);
+    if (selectedButton) {
+        selectedButton.classList.add('bg-gold', 'text-black', 'border-gold', 'active');
+    }
+    renderProducts();
+}
+
+function searchProducts(query) {
+    productSearchQuery = query;
+    renderProducts();
 }
 
 function openFullscreenModal(productId) {
@@ -193,12 +372,29 @@ function openFullscreenModal(productId) {
         oldPriceEl.classList.add('hidden');
     }
 
-    document.getElementById('modal-img').src = currentSelectedProduct.image;
-    document.getElementById('modal-img').onerror = function () {
+    const modalImage = document.getElementById('modal-img');
+    const productImages = currentSelectedProduct.images && currentSelectedProduct.images.length
+        ? currentSelectedProduct.images
+        : [currentSelectedProduct.image];
+    modalImage.src = productImages[0];
+    modalImage.alt = currentSelectedProduct.title;
+    modalImage.onerror = function () {
         this.src = 'https://placehold.co/500x600/0b0b0b/D4AF37?text=Maillot+Bayern';
     };
+    const thumbnails = document.getElementById('modal-thumbnails');
+    thumbnails.innerHTML = productImages.map((image, index) => `
+        <button type="button" onclick="selectProductImage(${index})"
+                class="modal-thumbnail${index === 0 ? ' active' : ''}"
+                aria-label="Voir la variante ${index + 1} de ${currentSelectedProduct.title}"
+                aria-pressed="${index === 0}">
+            <img src="${image}" alt="" onerror="this.src='https://placehold.co/100x100/0b0b0b/D4AF37?text=Maillot'">
+        </button>
+    `).join('');
+    document.getElementById('modal-gallery').classList.toggle('hidden', productImages.length < 2);
     document.getElementById('modal-title').innerText = currentSelectedProduct.title;
     document.getElementById('modal-price').innerText = `${currentSelectedProduct.price.toLocaleString()} FCFA`;
+    document.getElementById('modal-bundle-offer').classList.toggle('hidden', !isUnikTShirt(currentSelectedProduct));
+    document.getElementById('modal-bundle-color-note').classList.toggle('hidden', !isUnikTShirt(currentSelectedProduct));
     document.getElementById('modal-category').innerText = currentSelectedProduct.category;
     document.getElementById('modal-desc').innerText = currentSelectedProduct.description || 'Maillot officiel d\'excellente finition.';
 
@@ -210,9 +406,39 @@ function openFullscreenModal(productId) {
         </button>
     `).join('');
 
+    const colorSection = document.getElementById('modal-colors-section');
+    const colorContainer = document.getElementById('modal-colors-container');
+    selectedColor = '';
+    colorContainer.innerHTML = currentSelectedProduct.colors
+        ? currentSelectedProduct.colors.map(color => `
+            <button type="button" onclick="selectModalColor('${color}')" class="color-btn font-semibold px-3 py-2 rounded-xl text-sm border border-gray-300 dark:border-darkborder text-gray-700 dark:text-gray-200 transition">
+                ${color}
+            </button>
+        `).join('')
+        : '';
+    colorSection.classList.toggle('hidden', !currentSelectedProduct.colors || currentSelectedProduct.colors.length === 0);
+
     currentQuantity = 1;
     document.getElementById('modal-quantity').innerText = currentQuantity;
+    updateModalOrderTotal();
     document.getElementById('fullscreen-modal').classList.remove('hidden');
+}
+
+function selectProductImage(index) {
+    if (!currentSelectedProduct) return;
+    const productImages = currentSelectedProduct.images && currentSelectedProduct.images.length
+        ? currentSelectedProduct.images
+        : [currentSelectedProduct.image];
+    if (!productImages[index]) return;
+
+    const modalImage = document.getElementById('modal-img');
+    modalImage.src = productImages[index];
+    modalImage.alt = `${currentSelectedProduct.title} – variante ${index + 1}`;
+    document.querySelectorAll('.modal-thumbnail').forEach((thumbnail, thumbnailIndex) => {
+        const isSelected = thumbnailIndex === index;
+        thumbnail.classList.toggle('active', isSelected);
+        thumbnail.setAttribute('aria-pressed', String(isSelected));
+    });
 }
 
 function closeFullscreenModal() {
@@ -231,21 +457,46 @@ function selectModalSize(size) {
     }
 }
 
+function selectModalColor(color) {
+    selectedColor = color;
+    document.querySelectorAll('.color-btn').forEach(btn => {
+        btn.classList.remove('border-gold', 'bg-gold', 'text-black');
+        btn.classList.add('border-gray-300', 'dark:border-darkborder', 'text-gray-700', 'dark:text-gray-200');
+    });
+    const selectedButton = [...document.querySelectorAll('.color-btn')].find(button => button.textContent.trim() === color);
+    if (selectedButton) {
+        selectedButton.classList.remove('border-gray-300', 'dark:border-darkborder', 'text-gray-700', 'dark:text-gray-200');
+        selectedButton.classList.add('border-gold', 'bg-gold', 'text-black');
+    }
+}
+
 function changeQuantity(delta) {
     if (currentQuantity + delta >= 1) {
         currentQuantity += delta;
         document.getElementById('modal-quantity').innerText = currentQuantity;
+        updateModalOrderTotal();
     }
+}
+
+function updateModalOrderTotal() {
+    if (!currentSelectedProduct) return;
+    document.getElementById('modal-order-total').innerText =
+        `Total pour ${currentQuantity} : ${calculateProductTotal(currentSelectedProduct, currentQuantity).toLocaleString()} FCFA`;
 }
 
 function orderOnWhatsApp() {
     if (!currentSelectedProduct) return;
+    if (currentSelectedProduct.colors && currentSelectedProduct.colors.length && !selectedColor) {
+        alert('Veuillez choisir une couleur avant de confirmer votre commande.');
+        return;
+    }
 
     const phone = '221766840494';
-    const totalPrice = currentSelectedProduct.price * currentQuantity;
-    const message = `Bonjour *TIME & TREND SÉNÉGAL* 👋,\nJe souhaite commander le maillot suivant :\n\n` +
+    const totalPrice = calculateProductTotal(currentSelectedProduct, currentQuantity);
+    const message = `Bonjour *TIME & TREND SÉNÉGAL* 👋,\nJe souhaite commander l’article suivant :\n\n` +
         `🏆 *Produit* : ${currentSelectedProduct.title}\n` +
         `📏 *Taille* : ${selectedSize}\n` +
+        `${selectedColor ? `🎨 *Couleur* : ${selectedColor}\n` : ''}` +
         `🔢 *Quantité* : ${currentQuantity}\n` +
         `💰 *Prix Total* : ${totalPrice.toLocaleString()} FCFA\n\n` +
         `Merci de me confirmer la disponibilité et les modalités de livraison à Dakar !`;
@@ -259,14 +510,23 @@ function directWhatsAppOrder(productId) {
     if (!product) return;
     currentSelectedProduct = product;
     selectedSize = product.sizes[0] || 'M';
+    selectedColor = '';
     currentQuantity = 1;
+    if (product.colors && product.colors.length) {
+        openFullscreenModal(productId);
+        return;
+    }
     orderOnWhatsApp();
 }
 
 function addToCart() {
     if (!currentSelectedProduct) return;
+    if (currentSelectedProduct.colors && currentSelectedProduct.colors.length && !selectedColor) {
+        alert('Veuillez choisir une couleur avant d’ajouter cet article au panier.');
+        return;
+    }
 
-    const existingItem = cart.find(item => item.id === currentSelectedProduct.id && item.size === selectedSize);
+    const existingItem = cart.find(item => item.id === currentSelectedProduct.id && item.size === selectedSize && (item.color || '') === selectedColor);
 
     if (existingItem) {
         existingItem.quantity += currentQuantity;
@@ -276,6 +536,7 @@ function addToCart() {
             title: currentSelectedProduct.title,
             price: currentSelectedProduct.price,
             size: selectedSize,
+            color: selectedColor,
             quantity: currentQuantity,
             image: currentSelectedProduct.image
         });
@@ -302,20 +563,20 @@ function renderCartModal() {
 
     if (cart.length === 0) {
         list.innerHTML = '<p class="text-center text-gray-500 py-4">Votre panier est vide.</p>';
+        document.getElementById('cart-promo-savings').classList.add('hidden');
         document.getElementById('cart-total-price').innerText = '0 FCFA';
         document.getElementById('cart-badge').innerText = '0';
         return;
     }
 
-    let total = 0;
+    const totals = calculateCartTotals(cart);
     cart.forEach((item, index) => {
-        total += item.price * item.quantity;
         const itemEl = document.createElement('div');
         itemEl.className = 'flex justify-between items-center pt-2';
         itemEl.innerHTML = `
             <div>
                 <p class="font-bold text-sm">${item.title}</p>
-                <p class="text-xs text-gray-400">Taille: ${item.size} | Qte: ${item.quantity}</p>
+                <p class="text-xs text-gray-400">Taille: ${item.size}${item.color ? ` | Couleur: ${item.color}` : ''} | Qte: ${item.quantity}</p>
                 <p class="text-xs text-gold font-bold">${(item.price * item.quantity).toLocaleString()} FCFA</p>
             </div>
             <button onclick="removeFromCart(${index})" class="text-red-500 hover:text-red-700 text-xs font-bold">Supprimer</button>
@@ -323,7 +584,10 @@ function renderCartModal() {
         list.appendChild(itemEl);
     });
 
-    document.getElementById('cart-total-price').innerText = `${total.toLocaleString()} FCFA`;
+    document.getElementById('cart-promo-savings').classList.toggle('hidden', totals.shirtDiscount === 0);
+    document.getElementById('cart-promo-savings').innerText =
+        `Réduction T-shirt Unik : −${totals.shirtDiscount.toLocaleString()} FCFA`;
+    document.getElementById('cart-total-price').innerText = `${totals.total.toLocaleString()} FCFA`;
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
     document.getElementById('cart-badge').innerText = totalItems;
 }
@@ -338,15 +602,16 @@ function sendCartToWhatsApp() {
     if (cart.length === 0) return;
     const phone = '221766840494';
     let message = `Bonjour *TIME & TREND SÉNÉGAL* 👋,\nVoici le récapitulatif de ma commande :\n\n`;
-    let total = 0;
-
     cart.forEach((item, idx) => {
         const sum = item.price * item.quantity;
-        total += sum;
-        message += `${idx + 1}. *${item.title}* (Taille: ${item.size}) - x${item.quantity} = ${sum.toLocaleString()} FCFA\n`;
+        message += `${idx + 1}. *${item.title}* (Taille: ${item.size}${item.color ? `, Couleur: ${item.color}` : ''}) - x${item.quantity} = ${sum.toLocaleString()} FCFA\n`;
     });
 
-    message += `\n💰 *TOTAL GLOBAL* : ${total.toLocaleString()} FCFA\n\nMerci de me contacter pour finaliser la livraison !`;
+    const totals = calculateCartTotals(cart);
+    if (totals.shirtDiscount > 0) {
+        message += `\n🎁 Réduction T-shirt Unik : −${totals.shirtDiscount.toLocaleString()} FCFA`;
+    }
+    message += `\n💰 *TOTAL GLOBAL* : ${totals.total.toLocaleString()} FCFA\n\nMerci de me contacter pour finaliser la livraison !`;
     window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
 }
 
@@ -500,6 +765,7 @@ function editArticle(id) {
     document.getElementById('article-old-price').value = product.oldPrice || '';
     document.getElementById('article-category').value = product.category;
     document.getElementById('article-sizes').value = product.sizes.join(', ');
+    document.getElementById('article-colors').value = (product.colors || []).join(', ');
     const selectedImage = product.image === BAYERN_JERSEY_IMG ? '' : normalizeImagePath(product.image);
     document.getElementById('article-image').value = selectedImage;
     const fileInput = document.getElementById('article-image-file');
@@ -518,17 +784,23 @@ function saveArticle(e) {
     const oldPriceValue = parseFloat(document.getElementById('article-old-price').value);
     const category = document.getElementById('article-category').value;
     const sizesInput = document.getElementById('article-sizes').value;
+    const colorsInput = document.getElementById('article-colors').value;
     const imageInput = document.getElementById('article-image').value.trim();
     const desc = document.getElementById('article-desc').value;
 
     const sizes = sizesInput.split(',').map(s => s.trim()).filter(s => s.length > 0);
+    const colors = colorsInput.split(',').map(color => color.trim()).filter(color => color.length > 0);
     const image = imageInput !== '' ? normalizeImagePath(imageInput) : BAYERN_JERSEY_IMG;
     const oldPrice = Number.isFinite(oldPriceValue) && oldPriceValue > 0 ? oldPriceValue : null;
 
     if (id) {
         const index = products.findIndex(p => p.id === id);
         if (index !== -1) {
-            products[index] = { id, title, price, oldPrice, category, sizes, image, description: desc };
+            const existingProduct = products[index];
+            const images = existingProduct.image === image
+                ? existingProduct.images || [image]
+                : [image];
+            products[index] = { id, title, price, oldPrice, category, sizes, colors, image, images, description: desc };
         }
     } else {
         const newProduct = {
@@ -538,7 +810,9 @@ function saveArticle(e) {
             oldPrice,
             category,
             sizes: sizes.length ? sizes : ['M', 'L', 'XL', 'XXL'],
+            colors,
             image,
+            images: [image],
             description: desc
         };
         products.push(newProduct);
